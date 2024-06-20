@@ -1,0 +1,65 @@
+import java.io.BufferedReader;
+import java.util.Scanner;
+import java.io.*;
+import java.nio.file.* ;
+
+public class mojaDwunastaAplikacja {
+    public static void main(String[] args) {
+
+
+
+        class LineCounterApp {
+            public static void main(String[] args) {
+                Scanner scanner = new Scanner(System.in);
+                String inputFilePath;
+                String outputFilePath;
+
+                while (true) {
+                    System.out.print("Proszę podaj ścieżkę do pliku wejściowego: ");
+                    inputFilePath = scanner.nextLine();
+
+                    if (Files.exists(Paths.get(inputFilePath))) {
+                        break;
+                    } else {
+                        System.out.println("Niestety plik nie istnieje. Proszę spróbować ponownie.");
+                    }
+                }
+
+                System.out.print("Podaj ścieżkę do pliku wyjściowego: ");
+                outputFilePath = scanner.nextLine();
+
+                int lineCount = countLinesInFile(inputFilePath);
+
+                if (lineCount != -1) {
+                    System.out.println("Liczba linii jaka znajduje się w pliku to: " + lineCount);
+                    writeOutputFile(outputFilePath, inputFilePath, lineCount);
+                } else {
+                    System.out.println("Wystąpił błąd podczas odczytu pliku.");
+                }
+            }
+
+            private static int countLinesInFile(String filePath) {
+                int lineCount = 0;
+                try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                    while (reader.readLine() != null) {
+                        lineCount++;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+                return lineCount;
+            }
+
+            private static void writeOutputFile(String outputFilePath, String inputFilePath, int lineCount) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath))) {
+                    writer.write("Nazwa pliku: " + inputFilePath + "\n");
+                    writer.write("Liczba linii: " + lineCount + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Wystąpił błąd podczas zapisu pliku wyjściowego. Spróbuj ponowanie.");
+                }
+            }
+        }
+    }
+}
