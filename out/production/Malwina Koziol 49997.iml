@@ -1,0 +1,116 @@
+public class mojaPietnastaAplikacja {
+     public static void main(String[] args) {
+
+          class Pojazd {
+             private String numerRejestracyjny;
+             private String kolor;
+             private double cena;
+             private int przebieg;
+
+             public Pojazd(String numerRejestracyjny, String kolor, double cena, int przebieg) {
+                 this.numerRejestracyjny = numerRejestracyjny;
+                 this.kolor = kolor;
+                 this.cena = cena;
+                 this.przebieg = przebieg;
+             }
+
+             public void wypozycz() {
+                 System.out.println("Pojazd wypożyczony!");
+             }
+
+             public void zwroc() {
+                 System.out.println("Pojazd zwrócony!");
+             }
+
+             public String getNumerRejestracyjny() {
+                 return numerRejestracyjny;
+             }
+
+             public void setNumerRejestracyjny(String numerRejestracyjny) {
+                 this.numerRejestracyjny = numerRejestracyjny;
+             }
+
+             public String getKolor() {
+                 return kolor;
+             }
+
+             public void setKolor(String kolor) {
+                 this.kolor = kolor;
+             }
+
+             public double getCena() {
+                 return cena;
+             }
+
+             public void setCena(double cena) {
+                 this.cena = cena;
+             }
+
+             public int getPrzebieg() {
+                 return przebieg;
+             }
+
+             public void setPrzebieg(int przebieg) {
+                 this.przebieg = przebieg;
+             }
+         }
+
+         class Rower extends Pojazd {
+             private int liczbaPrzerzutek;
+
+             public Rower(String numerRejestracyjny, String kolor, double cena, int przebieg, int liczbaPrzerzutek) {
+                 super(numerRejestracyjny, kolor, cena, przebieg);
+                 this.liczbaPrzerzutek = liczbaPrzerzutek;
+             }
+
+             public void jedz() {
+                 System.out.println("Jadę rowerem!");
+             }
+
+             public int getLiczbaPrzerzutek() {
+                 return liczbaPrzerzutek;
+             }
+
+             public void setLiczbaPrzerzutek(int liczbaPrzerzutek) {
+                 this.liczbaPrzerzutek = liczbaPrzerzutek;
+             }
+         }
+
+         class Hulajnoga extends Pojazd {
+             private boolean elektryczna;
+
+             public Hulajnoga(String numerRejestracyjny, String kolor, double cena, int przebieg, boolean elektryczna) {
+                 super(numerRejestracyjny, kolor, cena, przebieg);
+                 this.elektryczna = elektryczna;
+             }
+
+             public void jedz() {
+                 System.out.println("Jadę hulajnogą!");
+             }
+
+             public boolean isElektryczna() {
+                 return elektryczna;
+             }
+
+             public void setElektryczna(boolean elektryczna) {
+                 this.elektryczna = elektryczna;
+             }
+         }
+
+         class TestWypozyczalni {
+             public static void main(String[] args) {
+                 Pojazd rower = new Rower("ROW001", "Czerwony", 50.0, 100, 21);
+                 Pojazd hulajnoga = new Hulajnoga("HUL001", "Niebieski", 30.0, 50, true);
+
+                 rower.wypozycz();
+                 ((Rower) rower).jedz();
+                 rower.zwroc();
+
+                 hulajnoga.wypozycz();
+                 ((Hulajnoga) hulajnoga).jedz();
+                 hulajnoga.zwroc();
+             }
+         }
+         TestWypozyczalni.main(args);
+     }
+ }
